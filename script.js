@@ -136,9 +136,16 @@ form.addEventListener("submit", (event) => {
 
 });
 
+
+const timeUpBell = document.createElement("audio");
+timeUpBell.src = "./time-up-ding.mp3"
+
 function countdownStopped(cardNode) {
+    timeUpBell.play();
+    
     console.log("timer up for:", cardNode);
     cardNode.classList.add("timer-up");
+    
 
     const innerContainer = cardNode.querySelector(".card-inner-container");
     innerContainer.querySelector(".card-title").style.visibility="hidden";
@@ -153,6 +160,7 @@ function countdownStopped(cardNode) {
     const button = innerContainer.querySelector("button");
 
     innerContainer.insertBefore(timeUpBanner, button);
+
 
     button.innerText="Stop";
 
