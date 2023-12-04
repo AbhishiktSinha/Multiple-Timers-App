@@ -24,7 +24,7 @@ function createTimerCard() {
         timerValueContainer.append(hoursContainer, separator, minsContainer, separator.cloneNode(true), secContainer);        
 
         const cardButton = document.createElement("button");
-        cardButton.innerText = "Delete";
+        cardButton.innerText = "Stop";
 
     innerContainer.append(cardTitlte, timerValueContainer, cardButton);
 
@@ -119,12 +119,26 @@ form.addEventListener("submit", (event) => {
     
 
     const cardButton = newCard.querySelector(".card-inner-container >button");
+
+    cardButton.setAttribute("data-forCard", `${timeCardID}`)
+    
     cardButton.addEventListener("click", (event)=> {
         const cardNode = event.target.parentElement.parentElement;
         const cardNodeIndex = cardNode.id.slice(cardNode.id.lastIndexOf('-')+1);
 
-        clearInterval(cardsArray[cardNodeIndex].intervalId);
-        cardNode.remove();
+        console.log(cardsArray[cardNodeIndex]);
+
+        if(event.target.innerText==="Stop") {
+            clearInterval(cardsArray[cardNodeIndex].intervalId);
+            event.target.innerText = "Delete";
+        }
+        else if(event.target.innerText === "Delete") {
+
+            cardNode.remove();
+    
+            delete cardsArray[cardNodeIndex];
+        }
+
 
         if(currentTimersSection.childElementCount === 2) {
             currentTimersSection.querySelector(".current-timers-placeholder").classList.toggle("hide");
@@ -132,7 +146,6 @@ form.addEventListener("submit", (event) => {
     });
 
     timeCardID++;
-
 
 });
 
@@ -142,8 +155,8 @@ timeUpBell.src = "./time-up-ding.mp3"
 
 function countdownStopped(cardNode) {
     timeUpBell.play();
-    
-    console.log("timer up for:", cardNode);
+
+    // console.log("timer up for:", cardNode);
     cardNode.classList.add("timer-up");
     
 
@@ -157,12 +170,12 @@ function countdownStopped(cardNode) {
     timeUpBanner.innerText="Time Is Up !"
     timeUpBanner.className ="time-up-banner";
 
-    const button = innerContainer.querySelector("button");
+    const button = cardNode .querySelector("button");
+    button.innerText = 'Delete';
+    
+    console.info('button text: ', button);
 
     innerContainer.insertBefore(timeUpBanner, button);
-
-
-    button.innerText="Stop";
 
 }
 

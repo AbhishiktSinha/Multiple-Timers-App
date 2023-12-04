@@ -43,12 +43,12 @@ h2 {
     /* width: 50%;
     min-width: fit-content; */
 
-    width: 500px;
+    width: 50%;
 
-    min-width: 460px;
+    min-width: 428px;
 
-    height: 15vh;
-    min-height: 120px;
+    height: 16.5vh;
+    min-height: 60px;
 
     border-radius: 24px;
     padding-inline: 14px;
@@ -66,10 +66,11 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    column-gap: 15px;
+    column-gap: 10px;
 }
 .card-title{
     color: #fff;
+    text-wrap: nowrap;
 }
 
 .time-up-banner{
@@ -83,7 +84,8 @@ h2 {
 }
 
 .timer-value-container {
-    width: 300px;
+    width: 280px;
+    min-width: 170px;
     display: flex;
     justify-content: space-between;
     align-items: center;
